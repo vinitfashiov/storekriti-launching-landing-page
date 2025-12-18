@@ -34,66 +34,68 @@ export function ApplicationPopup() {
         setIsOpen(true);
         sessionStorage.setItem("popupShown", "true");
       }, 5000);
+
       return () => clearTimeout(timer);
     }
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setIsSubmitting(true);
+    e.preventDefault();
+    setIsSubmitting(true);
 
-  try {
-    // Basic client-side cleanup/validation
-    const payload = {
-      ...formData,
-      whatsapp: formData.whatsapp.trim(),
-      name: formData.name.trim(),
-      businessType: formData.businessType.trim(),
-      reason: formData.reason.trim(),
-    };
+    try {
+      // ✅ Map popup form fields to DB column names (same as page form)
+      const payload = {
+        name: formData.name.trim(),
+        whatsapp: formData.whatsapp.trim(),
+        business_type: formData.businessType.trim(),
+        budget_range: formData.budget || null,
+        start_timeline: formData.timeline || null,
+        motivation: formData.reason.trim(),
+        source: "popup",
+      };
 
-    const res = await fetch("/api/leads", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-    const data = await res.json().catch(() => null);
+      const data = await res.json().catch(() => null);
 
-    if (!res.ok) {
-      const msg =
-        (data && (data.message || data.error)) ||
-        "Failed to submit. Please try again.";
-      throw new Error(msg);
+      if (!res.ok) {
+        const msg =
+          (data && (data.message || data.error)) ||
+          "Failed to submit. Please try again.";
+        throw new Error(msg);
+      }
+
+      toast({
+        title: "Application Submitted",
+        description:
+          "We'll review your application and get back to you within 24 hours.",
+      });
+
+      setFormData({
+        name: "",
+        whatsapp: "",
+        businessType: "",
+        budget: "",
+        timeline: "",
+        reason: "",
+      });
+
+      // Close popup on success
+      setIsOpen(false);
+    } catch (err: any) {
+      toast({
+        title: "Submission failed",
+        description: err?.message || "Something went wrong. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
-
-    toast({
-      title: "Application Submitted",
-      description:
-        "We'll review your application and get back to you within 24 hours.",
-    });
-
-    setFormData({
-      name: "",
-      whatsapp: "",
-      businessType: "",
-      budget: "",
-      timeline: "",
-      reason: "",
-    });
-
-    // Close popup on success
-    setIsOpen(false);
-  } catch (err: any) {
-    toast({
-      title: "Submission failed",
-      description: err?.message || "Something went wrong. Please try again.",
-    });
-  } finally {
-    setIsSubmitting(false);
-  }
-};
-
+  };
 
   const handleClose = () => {
     setIsOpen(false);
@@ -151,25 +153,39 @@ export function ApplicationPopup() {
               <form onSubmit={handleSubmit} className="space-y-3">
                 <div className="grid sm:grid-cols-2 gap-3">
                   <div className="space-y-1">
-                    <Label htmlFor="popup-name" className="text-xs font-medium text-foreground">Name</Label>
+                    <Label
+                      htmlFor="popup-name"
+                      className="text-xs font-medium text-foreground"
+                    >
+                      Name
+                    </Label>
                     <Input
                       id="popup-name"
                       placeholder="Your full name"
                       value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, name: e.target.value })
+                      }
                       required
                       className="bg-white text-black border border-gray-300 focus:border-black"
                     />
                   </div>
 
                   <div className="space-y-1">
-                    <Label htmlFor="popup-whatsapp" className="text-xs font-medium text-foreground">WhatsApp Number</Label>
+                    <Label
+                      htmlFor="popup-whatsapp"
+                      className="text-xs font-medium text-foreground"
+                    >
+                      WhatsApp Number
+                    </Label>
                     <Input
                       id="popup-whatsapp"
                       type="tel"
                       placeholder="+91 98765 43210"
                       value={formData.whatsapp}
-                      onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, whatsapp: e.target.value })
+                      }
                       required
                       className="bg-white text-black border border-gray-300 focus:border-black"
                     />
@@ -177,12 +193,19 @@ export function ApplicationPopup() {
                 </div>
 
                 <div className="space-y-1">
-                  <Label htmlFor="popup-businessType" className="text-xs font-medium text-foreground">Business Type</Label>
+                  <Label
+                    htmlFor="popup-businessType"
+                    className="text-xs font-medium text-foreground"
+                  >
+                    Business Type
+                  </Label>
                   <Input
                     id="popup-businessType"
                     placeholder="e.g., Fashion, Beauty, Food, etc."
                     value={formData.businessType}
-                    onChange={(e) => setFormData({ ...formData, businessType: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, businessType: e.target.value })
+                    }
                     required
                     className="bg-white text-black border border-gray-300 focus:border-black"
                   />
@@ -190,28 +213,46 @@ export function ApplicationPopup() {
 
                 <div className="grid sm:grid-cols-2 gap-3">
                   <div className="space-y-1">
-                    <Label htmlFor="popup-budget" className="text-xs font-medium text-foreground">Budget Range</Label>
+                    <Label
+                      htmlFor="popup-budget"
+                      className="text-xs font-medium text-foreground"
+                    >
+                      Budget Range
+                    </Label>
                     <Select
                       value={formData.budget}
-                      onValueChange={(value) => setFormData({ ...formData, budget: value })}
+                      onValueChange={(value) =>
+                        setFormData({ ...formData, budget: value })
+                      }
                       required
                     >
                       <SelectTrigger className="bg-white text-black border border-gray-300 focus:border-black">
                         <SelectValue placeholder="Select budget" />
                       </SelectTrigger>
                       <SelectContent className="bg-popover border-border rounded-xl z-[110]">
-                        <SelectItem value="25k-40k">₹25,000 - ₹40,000</SelectItem>
-                        <SelectItem value="40k-60k">₹40,000 - ₹60,000</SelectItem>
+                        <SelectItem value="25k-40k">
+                          ₹25,000 - ₹40,000
+                        </SelectItem>
+                        <SelectItem value="40k-60k">
+                          ₹40,000 - ₹60,000
+                        </SelectItem>
                         <SelectItem value="60k+">₹60,000+</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
 
                   <div className="space-y-1">
-                    <Label htmlFor="popup-timeline" className="text-xs font-medium text-foreground">When to start?</Label>
+                    <Label
+                      htmlFor="popup-timeline"
+                      className="text-xs font-medium text-foreground"
+                    >
+                      When to start?
+                    </Label>
                     <Select
                       value={formData.timeline}
-                      onValueChange={(value) => setFormData({ ...formData, timeline: value })}
+                      onValueChange={(value) =>
+                        setFormData({ ...formData, timeline: value })
+                      }
                       required
                     >
                       <SelectTrigger className="bg-white text-black border border-gray-300 focus:border-black">
@@ -219,7 +260,9 @@ export function ApplicationPopup() {
                       </SelectTrigger>
                       <SelectContent className="bg-popover border-border rounded-xl z-[110]">
                         <SelectItem value="immediately">Immediately</SelectItem>
-                        <SelectItem value="1-2-weeks">Within 1-2 weeks</SelectItem>
+                        <SelectItem value="1-2-weeks">
+                          Within 1-2 weeks
+                        </SelectItem>
                         <SelectItem value="1-month">Within 1 month</SelectItem>
                         <SelectItem value="exploring">Just exploring</SelectItem>
                       </SelectContent>
@@ -228,12 +271,19 @@ export function ApplicationPopup() {
                 </div>
 
                 <div className="space-y-1">
-                  <Label htmlFor="popup-reason" className="text-xs font-medium text-foreground">Why do you want to build this store now?</Label>
+                  <Label
+                    htmlFor="popup-reason"
+                    className="text-xs font-medium text-foreground"
+                  >
+                    Why do you want to build this store now?
+                  </Label>
                   <Textarea
                     id="popup-reason"
                     placeholder="Tell us about your motivation and goals..."
                     value={formData.reason}
-                    onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, reason: e.target.value })
+                    }
                     required
                     className="bg-white text-black border border-gray-300 focus:border-black"
                   />
