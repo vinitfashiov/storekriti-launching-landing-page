@@ -14,11 +14,13 @@ import {
 import { toast } from "@/hooks/use-toast";
 import { ArrowRight, Loader2, Shield, Clock, MessageCircle } from "lucide-react";
 
+
 const formBenefits = [
   { icon: Clock, text: "Response within 24 hours" },
   { icon: Shield, text: "Your data is secure" },
-  { icon: MessageCircleCircle, text: "Direct founder communication" },
+  { icon: MessageCircle, text: "Direct founder communication" },
 ];
+
 
 // ⚠️ Fix typo: your original uses MessageCircle, not MessageCircle? Keep as it was.
 // If you get error here, replace "MessageCircle" correctly and delete this comment line.
