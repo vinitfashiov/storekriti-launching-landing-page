@@ -2,9 +2,9 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Card, CardContent, CardHeader, CardTitle } from "C:/Users/store/Downloads/storekriti-functional-form-with-popup/storekriti-launchpad-main/src/components/ui/card";
-import { Input } from "C:/Users/store/Downloads/storekriti-functional-form-with-popup/storekriti-launchpad-main/src/components/ui/input";
-import { Button } from "C:/Users/store/Downloads/storekriti-functional-form-with-popup/storekriti-launchpad-main/src/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
+import { Input } from "../../components/ui/input";
+import { Button } from "../../components/ui/button";
 
 export default function AdminLoginPage() {
   const [password, setPassword] = useState("");
