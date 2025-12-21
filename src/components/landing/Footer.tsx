@@ -153,7 +153,7 @@ export function Footer() {
               Subscribe
             </Button>
             <p className="hidden lg:block text-sm text-background/60 max-w-xs">
-              No spam, notifications only about new products, updates and freebies. You can always unsubscribe.
+              Office Address: SK Jha Campus, Laxmi Cold Store, Musallahpur Hatt, Patna, 800006
             </p>
           </form>
 
@@ -174,7 +174,7 @@ export function Footer() {
 
         {/* Mobile Newsletter Description */}
         <p className="lg:hidden text-sm text-background/60 mt-4">
-          No spam, notifications only about new products, updates and freebies. You can always unsubscribe.
+          Office Address: SK Jha Campus, Laxmi Cold Store, Musallahpur Hatt, Patna, 800006
         </p>
 
         {/* Divider */}
@@ -182,7 +182,7 @@ export function Footer() {
 
         {/* Copyright */}
         <p className="text-sm text-background/60">
-          © Copyright {new Date().getFullYear()} Storekriti – Premium D2C Website Developers
+          © Copyright {new Date().getFullYear()} Storekriti – Premium Website Developers
         </p>
       </div>
     </footer>

@@ -4,10 +4,15 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 const stats = [
-  { number: "50+", label: "Stores Launched", icon: CheckCircle2, accent: "from-green-500/20 to-green-500/5" },
-  { number: "7", label: "Day Delivery", icon: Clock, accent: "from-blue-500/20 to-blue-500/5" },
+  { number: "100+", label: "Brands Launched", icon: CheckCircle2, accent: "from-green-500/20 to-green-500/5" },
+  { number: "7", label: "Day Rapid Delivery", icon: Clock, accent: "from-blue-500/20 to-blue-500/5" },
   { number: "₹25L+", label: "GMV Generated", icon: Award, accent: "from-amber-500/20 to-amber-500/5" },
-  { number: "98%", label: "Satisfaction", icon: Star, accent: "from-purple-500/20 to-purple-500/5" },
+  {
+  number: "4.8 ★",
+  label: "Client Rating on Us",
+  icon: Star,
+  accent: "from-purple-400/20 to-purple-400/5",
+},
 ];
 
 const trustPoints = [
@@ -20,7 +25,7 @@ const trustPoints = [
   {
     icon: Shield,
     title: "Proven Framework",
-    description: "Our launch system has been refined across 50+ successful D2C brand builds.",
+    description: "Our launch system has been refined across 100+ successful D2C brand builds.",
     highlight: "50+ Brands",
   },
   {
@@ -133,13 +138,29 @@ export function TrustSection() {
             "We don't work with everyone. We work with brands ready to invest in quality."
           </p>
           <Link to="/comparison">
-            <Button
-              variant="outline"
-              className="group px-8 py-6 text-base sm:text-lg font-medium rounded-full bg-background text-foreground hover:bg-background/90 border-0 transition-all duration-300 hover:scale-105 shadow-xl shadow-background/20"
-            >
-              See Why We're Different
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-            </Button>
+            <div className="flex justify-center">
+  <Button
+    variant="outline"
+    className="
+      h-12 sm:h-[50px]
+      px-8
+      min-w-[240px]
+      rounded-xl
+      bg-white
+      text-black
+      border border-black/30
+      hover:bg-white
+      font-semibold
+      text-[15px] sm:text-[16px]
+      flex items-center justify-center gap-2
+      transition-none
+    "
+  >
+    See Why We're Different
+    <ArrowRight className="h-4 w-4 text-black" />
+  </Button>
+</div>
+
           </Link>
         </motion.div>
       </div>

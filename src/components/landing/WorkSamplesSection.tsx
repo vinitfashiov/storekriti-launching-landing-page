@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Briefcase } from "lucide-react";
+import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import store1 from "@/assets/portfolio/store-1.png";
@@ -18,38 +18,36 @@ const storeImages = [
   store6, store7, store8, store9, store10,
 ];
 
-const MovingRow = ({ 
-  images, 
-  duration = 40 
-}: { 
-  images: string[]; 
+const MovingRow = ({
+  images,
+  duration = 40,
+}: {
+  images: string[];
   duration?: number;
 }) => {
   const duplicatedImages = [...images, ...images, ...images];
-  
+
   return (
     <div className="flex overflow-hidden">
       <motion.div
         className="flex gap-4"
-        animate={{
-          x: ["0%", "-33.333%"],
-        }}
+        animate={{ x: ["0%", "-33.333%"] }}
         transition={{
           x: {
             repeat: Infinity,
             repeatType: "loop",
-            duration: duration,
+            duration,
             ease: "linear",
           },
         }}
       >
         {duplicatedImages.map((img, index) => (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className="flex-shrink-0 w-[215px] h-[382px] rounded-lg overflow-hidden shadow-sm"
           >
-            <img 
-              src={img} 
+            <img
+              src={img}
               alt={`Store ${(index % 10) + 1}`}
               className="w-full h-full object-cover object-top"
             />
@@ -61,59 +59,60 @@ const MovingRow = ({
 };
 
 export function WorkSamplesSection() {
+  const scrollToApply = () => {
+    document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section className="py-16 md:py-24 overflow-hidden bg-background">
       <div className="container mx-auto px-4 sm:px-6">
-        {/* Mobile Header */}
-        <div className="md:hidden mb-8">
+        {/* CENTERED HEADER (Mobile + Desktop) */}
+        <div className="mb-12 text-center flex flex-col items-center">
           <span className="inline-block px-4 py-2 mb-4 text-sm font-medium bg-background text-foreground rounded-full border border-foreground">
             A Glimpse Of Our Work
           </span>
-          <h2 className="text-3xl font-display font-normal text-foreground mb-4 leading-tight">
-            A few sucessful stores<br />
-            <span className="italic">developed by us</span>
-          </h2>
-          <div className="flex items-center gap-3 mb-4">
-            <Button className="rounded-full bg-foreground text-background hover:bg-foreground/90 gap-2 text-sm">
-              View Full Portfolio <ArrowRight className="h-4 w-4" />
-            </Button>
-            <Button size="icon" className="rounded-full bg-foreground text-background hover:bg-foreground/90 h-10 w-10">
-              <Briefcase className="h-4 w-4" />
-            </Button>
-          </div>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            Join 600+ brands that trust Jhango for their eCommerce success. From innovative design to seamless performance, we deliver results that elevate businesses in today's competitive market.
-          </p>
-        </div>
 
-        {/* Desktop Header */}
-        <div className="hidden md:flex md:items-start md:justify-between mb-12">
-          <div>
-            <span className="inline-block px-4 py-2 mb-4 text-sm font-medium bg-background text-foreground rounded-full border border-foreground">
-              A Glimpse Of Our Work
+          <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-normal text-foreground mb-4 leading-tight">
+            A few successful stores <br />
+            <span className="font-display font-normal text-foreground">
+              developed by Storekriti
             </span>
-            <h2 className="text-4xl lg:text-5xl xl:text-6xl font-display font-normal text-foreground mb-4 leading-tight">
-              A few sucessful stores<br />
-              <span className="italic">developed by us</span>
-            </h2>
-            <p className="text-base lg:text-lg text-muted-foreground max-w-2xl">
-              Join 600+ brands that trust Jhango for their eCommerce success. From innovative design to seamless performance, we deliver results that elevate businesses in today's competitive market.
-            </p>
-          </div>
-          <div className="flex items-center gap-3">
-            <Button className="rounded-full bg-foreground text-background hover:bg-foreground/90 gap-2">
-              View Full Portfolio <ArrowRight className="h-4 w-4" />
-            </Button>
-            <Button size="icon" className="rounded-full bg-foreground text-background hover:bg-foreground/90 h-10 w-10">
-              <Briefcase className="h-4 w-4" />
-            </Button>
-          </div>
+          </h2>
+
+          <p className="text-sm sm:text-base lg:text-lg text-muted-foreground max-w-2xl">
+            Join 600+ brands that trust Jhango for their eCommerce success.
+            From innovative design to seamless performance.
+          </p>
         </div>
       </div>
 
-      {/* Single Scrolling Row */}
+      {/* Scrolling Images */}
       <div className="mt-8">
         <MovingRow images={storeImages} duration={35} />
+      </div>
+
+      {/* CTA Button BELOW images */}
+      <div className="mt-12 flex justify-center px-4">
+        <Button
+          onClick={scrollToApply}
+          className="
+            h-12 sm:h-[50px]
+            min-w-[260px] sm:min-w-[300px]
+            px-8
+            rounded-xl
+            bg-[#2b2b2b]
+            text-white
+            border border-[#1f1f1f]
+            hover:bg-[#2b2b2b]
+            font-semibold
+            text-[16px]
+            flex items-center justify-center gap-3
+            whitespace-nowrap
+          "
+        >
+          <Phone className="h-5 w-5 text-white" />
+          Book a Call
+        </Button>
       </div>
     </section>
   );

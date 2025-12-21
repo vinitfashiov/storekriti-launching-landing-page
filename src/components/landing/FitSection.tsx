@@ -18,10 +18,10 @@ export function FitSection() {
         duration: 0.6
       }} className="text-center mb-12 md:mb-16">
           <span className="inline-block px-4 py-2 mb-6 text-xs sm:text-sm font-medium bg-secondary text-foreground rounded-full border border-border">
-            Who We Work With
+            This is not for everyone
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-normal text-foreground">
-            This is <span className="italic">not</span> for everyone.
+            If you are serious about Launching your brand
           </h2>
         </motion.div>
 

@@ -41,8 +41,7 @@ export function HeroSection() {
               transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-normal tracking-tight text-foreground leading-[1.1] mb-6"
             >
-              Conversion-Ready <span className="italic">D2C Websites</span> in 7
-              Days
+              We build websites that bring orders for You!
             </motion.h1>
 
             {/* Description */}
@@ -70,11 +69,11 @@ export function HeroSection() {
                 size="lg"
                 className="w-full sm:w-auto group px-8 py-6 text-base font-medium bg-foreground text-background hover:bg-foreground/90 rounded-lg transition-all duration-300 hover:shadow-xl hover:shadow-foreground/20"
               >
-                Apply for Launch
+                Book a call with Storekriti
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Button>
               <p className="text-sm text-muted-foreground">
-                Avg. launch value: ₹25k–₹60k • Limited monthly slots
+                Avg. launch value: ₹20K • Limited monthly slots
               </p>
             </motion.div>
 
@@ -85,7 +84,7 @@ export function HeroSection() {
               transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
               className="text-sm text-muted-foreground/70 italic"
             >
-              We don't take every project. Applications are reviewed.
+              With over 100+ Brands Online • Launched their Website Online
             </motion.p>
           </div>
 
